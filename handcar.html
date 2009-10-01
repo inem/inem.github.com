@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<title></title>
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript" src="/javascripts/application.js"></script>
+<link rel="stylesheet" href="/stylesheets/application.css" type="text/css" />
+</head>
+<body>
+<div id='wrap'>
+<div id='header'>
+<div id='content'>
+<h1><a href="/">Our 48*4 hours' output</a></h1>
+<h1>Handcar</h1>
+<div class='img'>
+<img alt='handcar' src='/images/handcar.png' />
+</div>
+<h2>Features</h2>
+<ul>
+<li>
+Here is your action:
+<script src='http://gist.github.com/173443.js'></script>
+</li>
+<li>
+And here is you firebug console:<br/>
+<img alt='handcar output in firebug console' src='/images/handcar-full.png' />
+</li>
+<li>
+And moreover, when you get an error, it will display all your honks before that error:<br/>
+<img alt='handcar output in firebug console' src='/images/handcar-error.png' />
+<br/>
+I think you have got the idea
+</li>
+</ul>
+<h2>Installation</h2>
+<p>
+Handcar has two incarnations: rails plugin & firefox plugin.<br/>
+Both had to be installed:
+</p>
+<ul>
+<li>
+<a href="/plugins/handcar.xpi">Firefox extention</a>
+</li>
+<li>
+Rails plugin:<br/>
+<code>./script/plugin git://github.com/inem/handcar.git</code>
+</li>
+</ul>
+<h2>Possible issues</h2>
+<ul>
+<li>
+Handcar aims only local development process. It will not communicate with non-localhost machine.<br/>
+</li>
+<li>
+You will not see actual ruby objects in firebug. Of course it is your objects' representations in JSON format
+</li>
+</ul>
+<h2>Development plans</h2>
+<ul>
+<li>
+<a href="http://github.com/inem/handcar">http://github.com/inem/handcar</a>
+</li>
+<li>
+<a href="http://github.com/inem/handcar-firefox">http://github.com/inem/handcar-firefox</a>
+</li>
+</ul>
+<a href="http://github.com/inem/handcar"><img alt="Fork me on GitHub" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" style="border: 0pt none ; position: absolute; top: 0pt; right: 0pt;"/></a>
+
+</div>
+</div>
+<div id='navcontainer'>
+<ul id='navlist'>
+<li>
+<a href='#'>win</a>
+</li>
+<li>
+<a href='#'>mac</a>
+</li>
+<li>
+<a href='#'>koi-8</a>
+</li>
+<li id='kidding' style='display:none'>
+just kidding :)
+</li>
+</ul>
+</div>
+<div id='footer'>
+<a href="/team">Rozenbom Team</a>
+</div>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    j(document).ready(function(){
+      j('#navlist a').click(function(){
+        j('#kidding').show().fadeOut(4000);
+        return false;
+      });
+    })
+  //]]>
+</script>
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-103317-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>

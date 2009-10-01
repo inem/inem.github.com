@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<title></title>
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript" src="/javascripts/application.js"></script>
+<link rel="stylesheet" href="/stylesheets/application.css" type="text/css" />
+</head>
+<body>
+<div id='wrap'>
+<div id='header'>
+<div id='content'>
+<h1><a href="/">Our 48*4 hours' output</a></h1>
+<h2>
+<a href="http://twitter.com/rozenbom_team">Rozenbom Team</a>
+</h2>
+<a href='http://twitter.com/_ex_'>
+<img src='/images/team/eugene.jpg' title='Eugene Hlyzov' />
+</a>
+<a href='http://twitter.com/inem'>
+<img src='/images/team/ivan.jpg' title='Ivan Nemytchenko' />
+</a>
+<img src='/images/team/alex.jpg' title='Alexandr Alexandrov' />
+<a href='http://twitter.com/sletix'>
+<img src='/images/team/oleg.jpg' title='Oleg Artamonov' />
+</a>
+
+</div>
+</div>
+<div id='navcontainer'>
+<ul id='navlist'>
+<li>
+<a href='#'>win</a>
+</li>
+<li>
+<a href='#'>mac</a>
+</li>
+<li>
+<a href='#'>koi-8</a>
+</li>
+<li id='kidding' style='display:none'>
+just kidding :)
+</li>
+</ul>
+</div>
+<div id='footer'>
+Rozenbom Team
+</div>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    j(document).ready(function(){
+      j('#navlist a').click(function(){
+        j('#kidding').show().fadeOut(4000);
+        return false;
+      });
+    })
+  //]]>
+</script>
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-103317-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>

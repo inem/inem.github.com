@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<title></title>
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript" src="/javascripts/application.js"></script>
+<link rel="stylesheet" href="/stylesheets/application.css" type="text/css" />
+</head>
+<body>
+<div id='wrap'>
+<div id='header'>
+<div id='content'>
+<h1><a href="/">Our 48*4 hours' output</a></h1>
+<h1>Tequila</h1>
+<div class='img'>
+<img alt='tequila' src='/images/tequila.png' />
+</div>
+<h2>Features</h2>
+<div class='screenshot'>
+<img alt='Tequila features' src='/images/tequila-features.png' />
+</div>
+<ul>
+<li>
+<a href="http://gist.github.com/173339/">Here is Jazz template</a>
+</li>
+<li>
+<a href="http://gist.github.com/173255/">And here is it's JSON output</a>
+</li>
+</ul>
+<h2>Installation</h2>
+<code>
+./script/plugin git://github.com/inem/tequila.git
+</code>
+<p>
+After that drop some Tequila code into an apropriate template (should have .jazz extension) - and you are there!
+</p>
+<h2>Sandbox</h2>
+<p>
+Here are some prooflinks, where you can see, how JSON output differs for different jazz templates.<br/>
+Don't forget to turn on you firebug/safari console
+</p>
+<div id='sandbox'>
+<p>
+<a href='/tequila/high'>First example</a>
+<script src='http://gist.github.com/173535.js'></script>
+</p>
+<p>
+<a href='/tequila/normal'>Second example</a>
+<script src='http://gist.github.com/173536.js'></script>
+</p>
+<p>
+<a href='/tequila/low'>Third example</a>
+<script src='http://gist.github.com/173537.js'></script>
+</p>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    j(document).ready(function(){
+      j("#sandbox a").click(function(){
+        var url = j(this).attr('href');
+        j.getJSON(url, {}, function(data){
+          cl(data);
+        });
+        return false;
+      })
+    });
+  //]]>
+</script>
+<h2>Basic syntax</h2>
+<p>
+Have you ever used to_json method in your Rails app? If so, you should be familiar with basic
+Tequila syntax. You still have your :only, :except and :methods keywords. Instead of writing
+<pre><code>
+:include => { :association1 => {...}}
+</code></pre>
+you should just remember that every variable definition must be started '-' and every association with '+'. So example above can be written much shortly:
+<pre><code>
++association1
+</code></pre>
+</p>
+<h2>Advanced</h2>
+<h3>Labels</h3>
+<p>
+Label can be defined via expression (=&gt; label) which
+can be added everywhere where it makes sense. It means that you can add label to such elements as :code, +association, etc.. and can not add label to :except declaration and :gluening object. Some functionality of these features are covered by standart Rails to_json method and some aren't. For instance, if you bind alias 'animals' to assoication 'pets' it will automatically leads to bound 'animal' label to each Pet model below such declaration (see
+<a href="http://gist.github.com/173255/">example</a>
+).
+</p>
+<h3>Call methods with params</h3>
+<p>
+It is pretty simple. You just can pass any amount of params in any method in :methods definition. You should not create any presenters for model methods if you want to call them with params. Want to use instance method as param? No problem! With a bit of Tequila magic you can simple do so:
+<pre><code>
+...
+:methods
+  .calculate(1,2,3, total_count)
+</code></pre>
+</p>
+<h3>Code blocks</h3>
+<p>
+Code block are extremely useful if you need to add evaluable expression in the generated json but you don't want to store it as model (or presenter) method. For example you have attribute label, but for some reason you have to return "[# {label}]" just in one place of the code. The following feature allows you to keep your models clean:
+<pre><code>
+...
+:code => plabel
+  '[' + label + ']'
+end
+</code></pre>
+As result, in the generated data structure you will have additional field 'plabel' with desired value.
+</p>
+<h3>Gluing</h3>
+<p>
+It is another nice feature which you always want to have (may be instinctively ;). Sometimes you have 'belongs_to' association where you need just one attribute. And 'gluing' allows you to.. glue attributes from child associations. Compare:
+<pre><code>
+...
+:tag
+  :only
+    .label
+  +tagger
+    :only
+      .name
+end
+# Out:  {'tag' => {'label' => 'Happy Christmas!', 'tagger' => {'name' => 'Mr Lawrence"}}
+</code></pre>
+Generated json fragment looks like too comprehensive. Let us rewrite this fragment using gluing feature:
+<pre><code>
+...
+:tag
+  :only
+    .label
+  &lt;tagger
+    :only
+      .name => tagger_name
+end
+# Out:  {'tag' => {'label' => 'Happy Christmas!', 'tagger_name' => 'Mr Lawrence"}}
+</code></pre>
+Of course it can be handled via additional model methods, but latter is mere artifical solution. We are going to DRY, aren't we?
+</p>
+<h2>Issues</h2>
+<p>
+Strict order of definitions required! All blocks are optional.
+<ol>
+<li>:only or :except</li>
+<li>:methods</li>
+<li>:code blocks</li>
+<li>+asscociations</li>
+<li>&lt;gluening</li>
+</ol>
+</p>
+<h2>Development</h2>
+<h3>Benchmarks</h3>
+<script src='http://gist.github.com/173464.js'></script>
+<p>
+At least for these tests it looks like to_json is ~2.4x faster..<br/>
+But for some reason you use Ruby instead of C, right? Despite of the fact that Tequila is not too fast today we are happy to have such instrument and are going to develop it further. And we have good plans about it...
+</p>
+<h3>Plans</h3>
+<ul>
+<li>Grammatic review</li>
+<li>implement HashMapper fucntionality</li>
+<li>Arbitrary order of defenitions</li>
+<li>More tests for edge cases</li>
+<li>More syntax sugar</li>
+<li>Speedup</li>
+</ul>
+<em>And.. we are always open for your feedback! :)</em>
+<a href="http://github.com/inem/tequila"><img alt="Fork me on GitHub" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" style="border: 0pt none ; position: absolute; top: 0pt; right: 0pt;"/></a>
+
+</div>
+</div>
+<div id='navcontainer'>
+<ul id='navlist'>
+<li>
+<a href='#'>win</a>
+</li>
+<li>
+<a href='#'>mac</a>
+</li>
+<li>
+<a href='#'>koi-8</a>
+</li>
+<li id='kidding' style='display:none'>
+just kidding :)
+</li>
+</ul>
+</div>
+<div id='footer'>
+<a href="/team">Rozenbom Team</a>
+</div>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    j(document).ready(function(){
+      j('#navlist a').click(function(){
+        j('#kidding').show().fadeOut(4000);
+        return false;
+      });
+    })
+  //]]>
+</script>
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-103317-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>

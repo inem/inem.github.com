@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<title></title>
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript" src="/javascripts/application.js"></script>
+<link rel="stylesheet" href="/stylesheets/application.css" type="text/css" />
+</head>
+<body>
+<div id='wrap'>
+<div id='header'>
+<div id='content'>
+<h1>Our 48*4 hours' output</h1>
+<div class='block' id='tequila'>
+<h2>
+<a href="/tequila">Tequila</a>
+</h2>
+<div class='desc'>
+<div class='img'>
+<img alt='tequila' src='/images/tequila.png' />
+</div>
+<p>
+Tequila basically is HAML for JSON generation.
+</p>
+<p>
+Today while developing web applications with rich user UI,
+almost everything you need from rails backend is bunch of data in JSON format.
+</p>
+<ul>
+<li>
+Almost always, when you had to create unobvious set of data,
+your controllers became fat and ugly. Looks familiar?
+<script src='http://gist.github.com/173322.js'></script>
+</li>
+<li>
+And you had to create a lot of small helper methods in your models if you want for example
+fullname instead of firstname, middlename and lastname or
+you want pretty address, instead of separate fields for zip, country, state and street adress in your JSON.
+</li>
+<li>
+Ah, and you had to create child node in your JSON for has-one or belongs-to associations if you want to get even one attribute form association.
+</li>
+<li>
+You cannot rename keys in your json. You might want to use keyword "type", but it is reserved by rails.
+</li>
+<li>
+What about calling your method with some parameters while generating JSON? No native way, sorry...
+</li>
+</ul>
+<p>
+No way out?
+<a href="/tequila">Tequila is the salvation!</a>
+</p>
+</div>
+</div>
+<div class='block' id='xilence'>
+<h2>
+<a href="/xilence">Xilence</a>
+</h2>
+<div class='desc'>
+<div class='img'>
+<img alt='quiet please!' src='/images/xilence.png' />
+</div>
+<ul>
+<li>
+How often have you got 500 error while developing some super-cool ajax thing
+and seen stuff like this in your browser console?
+<img alt='Safari console rails backtrace noise' src='/images/safari-console-rails-backtrace.png' />
+</li>
+<li>Do we really need to scroll down all that HTML/CSS noise each time looking on rails error backtrace?</li>
+</ul>
+<p>
+Wanna make your backtraces clean and quiet for ajax requests?
+<a href="/xilence">Go for it!</a>
+</p>
+</div>
+</div>
+<div class='block' id='handcar'>
+<h2>
+<a href="/handcar">Handcar</a>
+</h2>
+<div class='desc'>
+<div class='img'>
+<img alt='handcar' src='/images/handcar.png' />
+</div>
+<p>
+Have you ever wanted to type console.log() in your rails app?
+<script src='http://gist.github.com/173543.js'></script>
+</p>
+<p>
+Handcar lets you to push data from your rails application to firebug console<br/>
+<ul>
+<li>
+It is useful when you do not want to deal with ruby debugger in simple cases
+</li>
+<li>
+No more every-minute switching from firefox/firebug to shell with logs
+</li>
+<li>
+Or you do not want to switch context from browser to you bash screen and scrolling logs looking for needed piece of data
+</li>
+</ul>
+</p>
+<p>
+<a href="/handcar">Just grab the plugins!</a>
+</p>
+</div>
+</div>
+
+</div>
+</div>
+<div id='navcontainer'>
+<ul id='navlist'>
+<li>
+<a href='#'>win</a>
+</li>
+<li>
+<a href='#'>mac</a>
+</li>
+<li>
+<a href='#'>koi-8</a>
+</li>
+<li id='kidding' style='display:none'>
+just kidding :)
+</li>
+</ul>
+</div>
+<div id='footer'>
+<a href="/team">Rozenbom Team</a>
+</div>
+</div>
+<script type='text/javascript'>
+  //<![CDATA[
+    j(document).ready(function(){
+      j('#navlist a').click(function(){
+        j('#kidding').show().fadeOut(4000);
+        return false;
+      });
+    })
+  //]]>
+</script>
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-103317-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>
